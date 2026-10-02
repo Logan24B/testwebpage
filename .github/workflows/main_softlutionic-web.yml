@@ -10,6 +10,10 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  AZURE_WEBAPP_NAME: softlutionic-web
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -25,9 +29,13 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_17BDD12491F742CAACC09EF26F6106CB }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_75ECA53B92EF4D0C902813786186A304 }}
 
+      - name: Show repository files
+        run: |
+          pwd
+          ls -la
+
       - name: Deploy Softlutionic website
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'softlutionic-web'
-          slot-name: 'Production'
-          package: .x
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
