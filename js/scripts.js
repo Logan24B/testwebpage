@@ -1,7 +1,7 @@
 /*!
 * Softlutionic - Integración del formulario de contacto con la API en Azure
 */
-const API_URL = "https://softlutionic-api2-hmftg2bvhxgdbsde.westus-01.azurewebsites.net/api/contactos";
+const API_URL = "https://softlutionic-api2-hmftg2bvhxqdbsde.westus-01.azurewebsites.net/api/Contactos";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contactForm");
@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        if (btn.disabled) return;
+
         okMsg.classList.add("d-none");
         errMsg.classList.add("d-none");
 
